@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System;
+using api;
 
 namespace nunit_tests;
 
