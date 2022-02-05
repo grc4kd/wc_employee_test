@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace nunit_tests
+namespace api
 {
     public class Employee
     {
