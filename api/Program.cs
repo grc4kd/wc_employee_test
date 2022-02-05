@@ -4,7 +4,7 @@ using api.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApiContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("apiContext")));
+    options.UseInMemoryDatabase("employeeDB"));
 
 // Add services to the container.
 
