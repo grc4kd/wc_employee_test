@@ -29,9 +29,9 @@ Hire Date
 
 Existing Employee Data:
 
-Id = 1, LastName = "Jackson", FirstName = "Alberta", Department = "Finance", HireDate = 6/5/2007
-Id = 2, LastName = "Bennett", FirstName = "Alicia", Department = "Human Resources", HireDate = 4/15/2001
-Id = 3, LastName = "Avent", FirstName = "Donna", Department = "Revenue", HireDate = 4/20/2009
-Id = 4, LastName = "Holder", FirstName = "Duane", Department = "Human Services", HireDate = 8/15/2020
+- Id = 1, LastName = "Jackson", FirstName = "Alberta", Department = "Finance", HireDate = 6/5/2007
+- Id = 2, LastName = "Bennett", FirstName = "Alicia", Department = "Human Resources", HireDate = 4/15/2001
+- Id = 3, LastName = "Avent", FirstName = "Donna", Department = "Revenue", HireDate = 4/20/2009
+- Id = 4, LastName = "Holder", FirstName = "Duane", Department = "Human Services", HireDate = 8/15/2020
 
 
