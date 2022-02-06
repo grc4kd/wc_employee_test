@@ -19,7 +19,7 @@ namespace nunit_tests
                                             .UseInMemoryDatabase("employeeDB")
                                             .Options;
 
-            _context = new ApiContext(options);
+            var _context = new ApiContext(options);
             var _seeder = new ApiContextSeeder(_context);
             _seeder.SeedData();
             return _context;
