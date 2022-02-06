@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using api.Data;
+using api.Model;
 
-namespace api
+namespace api.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly ApiContext _context;
+        private readonly IDbContext _context;
 
-        public EmployeesController(ApiContext context)
+        public EmployeesController(IDbContext context)
         {
             _context = context;
         }
