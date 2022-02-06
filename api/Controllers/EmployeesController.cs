@@ -14,9 +14,9 @@ namespace api.Controller
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IDbContext _context;
+        private readonly ApiContext _context;
 
-        public EmployeesController(IDbContext context)
+        public EmployeesController(ApiContext context)
         {
             _context = context;
         }
