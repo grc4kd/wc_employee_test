@@ -1,6 +1,6 @@
 using NUnit.Framework;
 using System;
-using api;
+using api.Model;
 
 namespace nunit_tests;
 
@@ -37,5 +37,5 @@ public class EmployeeTests
         Assert.AreEqual(firstName, _employee.FirstName);
         Assert.AreEqual(department, _employee.Department);
         Assert.AreEqual(hireDate, _employee.HireDate);
-    }
+    }   
 }

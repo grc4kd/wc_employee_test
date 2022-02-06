@@ -5,11 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Data
+namespace api.Model
 {
-    public class ApiContext : DbContext
+    public class IDbContext : DbContext
     {
-        public ApiContext (DbContextOptions<ApiContext> options)
+        public IDbContext(DbContextOptions<IDbContext> options)
             : base(options)
         {
         }

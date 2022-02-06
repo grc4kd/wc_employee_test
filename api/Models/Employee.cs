@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace api
+namespace api.Model
 {
     public class Employee
     {
