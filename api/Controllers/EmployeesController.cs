@@ -27,6 +27,7 @@ namespace api.Controller
         public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployee()
         {
             var employees = from e in _context.Employee
+                            orderby e.LastName, e.FirstName
                             select new EmployeeDTO()
                             {
                                 LastName = e.LastName,
