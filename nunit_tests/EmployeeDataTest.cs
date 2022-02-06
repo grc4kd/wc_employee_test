@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using api.Data;
 using api.Model;
+using api.Models;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
@@ -12,16 +13,22 @@ namespace nunit_tests
 {
     public class EmployeeDataTest
     {
-        [Test]
-        public async Task TestExistingEmployeeData()
+        static ApiContext SetUp()
         {
             var options = new DbContextOptionsBuilder<ApiContext>()
-                                .UseInMemoryDatabase("employeeDB")
-                                .Options;
+                                            .UseInMemoryDatabase("employeeDB")
+                                            .Options;
 
             var _context = new ApiContext(options);
             var _seeder = new ApiContextSeeder(_context);
             _seeder.SeedData();
+            return _context;
+        }
+
+        [Test]
+        public async Task TestExistingEmployeeData()
+        {
+            ApiContext _context = SetUp();
 
             var employee1 = await _context.FindAsync<Employee>(1);
             if (employee1 == null)
@@ -78,6 +85,23 @@ namespace nunit_tests
                 Assert.AreEqual("Human Services", employee4.Department);
                 Assert.AreEqual(new DateTime(2020, 8, 15), employee4.HireDate);
             }
+        }
+
+        [Test]
+        public void TestAvailableEmployeeDTOFields()
+        {
+            ApiContext _context = SetUp();
+
+            var employees = from e in _context.Employee
+                            select new EmployeeDTO()
+                            {
+                                LastName = e.LastName,
+                                FirstName = e.FirstName,
+                                Department = e.Department
+                            };
+
+            Assert.That(employees.Count(), Is.EqualTo(4));
+            Assert.That(employees.First().GetType(), Is.EqualTo(typeof(EmployeeDTO)));
         }
     }
 }
