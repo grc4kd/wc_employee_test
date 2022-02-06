@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Model
 {
-    public class IDbContext : DbContext
+    public class ApiContext : DbContext
     {
-        public IDbContext(DbContextOptions<IDbContext> options)
+        public ApiContext(DbContextOptions<ApiContext> options)
             : base(options)
         {
         }

@@ -5,9 +5,9 @@ namespace api.Data
 {
     public class ApiContextSeeder : ISeeder
     {
-        private readonly IDbContext _context;
+        private readonly ApiContext _context;
 
-        public ApiContextSeeder(IDbContext context)
+        public ApiContextSeeder(ApiContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

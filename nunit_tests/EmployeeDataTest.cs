@@ -15,11 +15,11 @@ namespace nunit_tests
         [Test]
         public async Task TestExistingEmployeeData()
         {
-            var options = new DbContextOptionsBuilder<IDbContext>()
+            var options = new DbContextOptionsBuilder<ApiContext>()
                                 .UseInMemoryDatabase("employeeDB")
                                 .Options;
 
-            var _context = new IDbContext(options);
+            var _context = new ApiContext(options);
             var _seeder = new ApiContextSeeder(_context);
             _seeder.SeedData();
 

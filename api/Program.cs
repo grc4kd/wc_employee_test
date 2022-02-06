@@ -7,7 +7,7 @@ using api.Data;
 // web application setup
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<IDbContext>(options =>
+builder.Services.AddDbContext<ApiContext>(options =>
     options.UseInMemoryDatabase("employeeDB"));
 
 // Add services to the container.
