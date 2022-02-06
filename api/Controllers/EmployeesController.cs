@@ -37,6 +37,20 @@ namespace api.Controller
             return await employees.ToListAsync();
         }
 
+        // GET api/Books
+        public IQueryable<Employee> GetBooks()
+        {
+            var books = from e in _context.Employee
+                        select new Employee()
+                        {
+                            LastName = e.LastName,
+                            FirstName = e.FirstName,
+                            Department= e.Department
+                        };
+
+            return books;
+        }
+
         // GET: api/Employees/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
