@@ -12,6 +12,20 @@ namespace nunit_tests
 {
     public class EmployeeDataTest
     {
+        private ApiContext _context;
+        
+        [TearDown]
+        public void TearDown()
+        {
+            // remove context object and...
+            if (_context != null)
+            {
+                // ...update garbage collector between tests
+                _context.Dispose();
+                GC.SuppressFinalize(this);
+            }            
+        }
+
         [Test]
         public async Task TestExistingEmployeeData()
         {
@@ -19,7 +33,7 @@ namespace nunit_tests
                                 .UseInMemoryDatabase("employeeDB")
                                 .Options;
 
-            var _context = new ApiContext(options);
+            _context = new ApiContext(options);
             var _seeder = new ApiContextSeeder(_context);
             _seeder.SeedData();
 
@@ -78,6 +92,20 @@ namespace nunit_tests
                 Assert.AreEqual("Human Services", employee4.Department);
                 Assert.AreEqual(new DateTime(2020, 8, 15), employee4.HireDate);
             }
+        }
+
+        [Test]
+        public void TestEmployeeDataOrder()
+        {
+            var options = new DbContextOptionsBuilder<ApiContext>()
+                                .UseInMemoryDatabase("employeeDB")
+                                .Options;
+
+            var _context = new ApiContext(options);
+            var _seeder = new ApiContextSeeder(_context);
+            _seeder.SeedData();
+
+            Assert.AreEqual("Avent", _context.Employee.First().LastName);
         }
     }
 }
