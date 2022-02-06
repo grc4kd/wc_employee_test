@@ -1,12 +1,8 @@
-﻿namespace api.Model
+﻿namespace api.Models
 {
-    /// <summary>
-    /// Data Transfer Object
-    /// per requirements, return only last and first name, then department
-    /// </summary>
+    // per requirements, return only LastName, FirstName, and Department fields
     public class EmployeeDTO
     {
-        public int Id { get; set; }
         public string? LastName { get; set; }
         public string? FirstName { get; set; }
         public string? Department { get; set; }

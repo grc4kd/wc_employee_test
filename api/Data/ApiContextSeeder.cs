@@ -16,10 +16,11 @@ namespace api.Data
         {
             _context.Database.EnsureCreated();
 
-            // only seed data when Employee table has not been populated
+            // only seed employees if table is empty
             if (_context.Employee.Any() == false)
             {
-                _context.Employee.AddRange(new Employee
+                _context.Employee.AddRange(
+                new Employee
                 {
                     Id = 1,
                     LastName = "Jackson",

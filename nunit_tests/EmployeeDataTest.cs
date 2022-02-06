@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using api.Data;
 using api.Model;
+using api.Models;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 
@@ -12,29 +13,22 @@ namespace nunit_tests
 {
     public class EmployeeDataTest
     {
-        private ApiContext? _context;
-        
-        [TearDown]
-        public void TearDown()
+        static ApiContext SetUp()
         {
-            // remove context object and...
-            if (_context != null)
-            {
-                // ...update garbage collector between tests
-                _context.Dispose();
-            }            
+            var options = new DbContextOptionsBuilder<ApiContext>()
+                                            .UseInMemoryDatabase("employeeDB")
+                                            .Options;
+
+            _context = new ApiContext(options);
+            var _seeder = new ApiContextSeeder(_context);
+            _seeder.SeedData();
+            return _context;
         }
 
         [Test]
         public async Task TestExistingEmployeeData()
         {
-            var options = new DbContextOptionsBuilder<ApiContext>()
-                                .UseInMemoryDatabase("employeeDB")
-                                .Options;
-
-            _context = new ApiContext(options);
-            var _seeder = new ApiContextSeeder(_context);
-            _seeder.SeedData();
+            ApiContext _context = SetUp();
 
             var employee1 = await _context.FindAsync<Employee>(1);
             if (employee1 == null)
@@ -94,17 +88,20 @@ namespace nunit_tests
         }
 
         [Test]
-        public void TestEmployeeDataOrder()
+        public void TestAvailableEmployeeDTOFields()
         {
-            var options = new DbContextOptionsBuilder<ApiContext>()
-                                .UseInMemoryDatabase("employeeDB")
-                                .Options;
+            ApiContext _context = SetUp();
 
-            var _context = new ApiContext(options);
-            var _seeder = new ApiContextSeeder(_context);
-            _seeder.SeedData();
+            var employees = from e in _context.Employee
+                            select new EmployeeDTO()
+                            {
+                                LastName = e.LastName,
+                                FirstName = e.FirstName,
+                                Department = e.Department
+                            };
 
-            Assert.AreEqual("Avent", _context.Employee.First().LastName);
+            Assert.That(employees.Count(), Is.EqualTo(4));
+            Assert.That(employees.First().GetType(), Is.EqualTo(typeof(EmployeeDTO)));
         }
     }
 }
