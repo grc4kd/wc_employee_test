@@ -12,7 +12,7 @@ namespace nunit_tests
 {
     public class EmployeeDataTest
     {
-        private ApiContext _context;
+        private ApiContext? _context;
         
         [TearDown]
         public void TearDown()
@@ -22,7 +22,6 @@ namespace nunit_tests
             {
                 // ...update garbage collector between tests
                 _context.Dispose();
-                GC.SuppressFinalize(this);
             }            
         }
 
